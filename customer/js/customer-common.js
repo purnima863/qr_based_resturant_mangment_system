@@ -1,6 +1,8 @@
 /* =====================================================
    CUSTOMER-COMMON.JS — header, nav, session + cart logic
    ===================================================== */
+const SCAN_VALID_HOURS = 4;
+
 const Cart = {
   items() {                       // joined with live menu data
     const menu = Store.menu();
@@ -39,7 +41,9 @@ const Customer = {
 
   init(active) {
     const s = Store.session();
-    if (!s.table) { location.replace('qr-entry.html'); return false; }
+    // menu & other pages open only after a fresh QR scan (valid for SCAN_VALID_HOURS)
+    const fresh = s.table && s.scannedAt && (Date.now() - s.scannedAt) < SCAN_VALID_HOURS * 3600e3;
+    if (!fresh) { s.table = null; s.scannedAt = null; s.cart = []; Store.setSession(s); location.replace('qr-entry.html'); return false; }
     const nav = this.NAV.map(n => `<a href="${n.href}" class="${n.key === active ? 'active' : ''}">${n.label}</a>`).join('');
     const bottom = this.NAV.map(n => `<a href="${n.href}" class="${n.key === active ? 'active' : ''}"><i class="fa-solid ${n.icon}"></i>${n.label}</a>`).join('');
     const h = $('#app-header');

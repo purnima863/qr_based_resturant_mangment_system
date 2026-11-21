@@ -33,14 +33,16 @@ function showProblem(title, text) {
 function enter(t) {
   const s = Store.session();
   if (s.table !== t.number) { s.cart = []; }      // new table → fresh cart
-  s.table = t.number; Store.setSession(s);
+  s.table = t.number; s.scannedAt = Date.now(); Store.setSession(s);
   stage.innerHTML = `${scanFrame(true)}<div class="muted small">Table detected</div>
     <div class="table-big"><i class="fa-solid fa-chair"></i> Table ${t.number}</div>
     <p class="muted small">Opening the menu…</p><a class="btn btn-primary btn-block" href="menu.html" style="margin-top:12px">View Menu <i class="fa-solid fa-arrow-right"></i></a>`;
   setTimeout(() => location.replace('menu.html'), 1100);
 }
 
-if (!params.has('table')) params.has('demo') ? showSimulator() : showScanPrompt();
+// demo simulator only on your own computer (localhost / opened as a file), never on the live website
+const isLocal = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+if (!params.has('table')) (params.has('demo') && isLocal) ? showSimulator() : showScanPrompt();
 else {
   stage.innerHTML = `${scanFrame(false)}<h3>Scanning…</h3><p class="muted small">Identifying your table</p>`;
   setTimeout(() => {
