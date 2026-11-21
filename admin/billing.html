@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billing — FoodieHub Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin">
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+      <div class="stat-grid" id="stats" style="margin-bottom:18px"></div>
+      <div class="toolbar">
+        <div class="search grow"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Search bills by order ID (e.g. ORD-1010), invoice no. or customer…"></div>
+        <select class="select" id="f-pay"><option value="all">All payments</option><option>Paid</option><option>Unpaid</option></select>
+        <button class="btn btn-primary" id="gen"><i class="fa-solid fa-file-circle-plus"></i> Generate invoice</button>
+      </div>
+      <div class="card panel flush">
+        <div class="table-wrap"><table class="data"><thead><tr><th>Invoice</th><th>Order ID</th><th>Customer</th><th>Table</th><th>Date</th><th>Subtotal</th><th>Tax</th><th>Total</th><th>Payment</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+      </div>
+      <div class="pager" id="pager"></div>
+    </main>
+  </div>
+</div>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="js/admin-common.js"></script>
+<script src="js/billing.js"></script>
+</body>
+</html>

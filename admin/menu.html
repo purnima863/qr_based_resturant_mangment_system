@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu — FoodieHub Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin">
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+      <div class="toolbar">
+        <div class="search grow"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Search food items…"></div>
+        <select class="select" id="f-cat"><option value="all">All categories</option></select>
+        <select class="select" id="f-avail"><option value="all">All status</option><option value="yes">Available</option><option value="no">Unavailable</option></select>
+        <button class="btn btn-outline" id="manage-cats"><i class="fa-solid fa-tags"></i> Categories</button>
+        <button class="btn btn-primary" id="add-item"><i class="fa-solid fa-plus"></i> Add food item</button>
+      </div>
+      <p class="muted small" id="count" style="margin-bottom:14px"></p>
+      <div class="m-grid" id="grid"></div>
+    </main>
+  </div>
+</div>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="js/admin-common.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>

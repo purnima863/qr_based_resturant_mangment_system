@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tables &amp; QR — FoodieHub Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin">
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+      <div class="stat-grid" id="stats" style="margin-bottom:18px"></div>
+      <div class="toolbar">
+        <div class="flex gap-1 wrap grow" id="filters"></div>
+        <button class="btn btn-primary" id="add-table"><i class="fa-solid fa-plus"></i> Add table</button>
+      </div>
+      <div id="floor"></div>
+    </main>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="js/admin-common.js"></script>
+<script src="js/tables.js"></script>
+</body>
+</html>

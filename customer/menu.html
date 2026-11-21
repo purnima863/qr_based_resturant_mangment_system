@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu — FoodieHub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/customer.css">
+</head>
+<body class="customer">
+<div id="app-header"></div>
+<div class="container">
+  <section class="hero">
+    <div class="hero-in">
+      <span class="eyebrow"><i class="fa-solid fa-qrcode"></i> Ordering from <b id="hero-table">Table</b></span>
+      <h1>Taste the <em>fire</em>,<br>skip the wait.</h1>
+      <p>Pick your favourites, place the order from your phone and we'll bring it straight to your table.</p>
+      <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input id="search" type="search" placeholder="Search pizza, biryani, lassi…" autocomplete="off"></div>
+    </div>
+  </section>
+
+  <div class="cat-bar" id="cat-bar"></div>
+  <div class="menu-tools">
+    <div class="left">
+      <label class="veg-toggle"><span class="switch"><input type="checkbox" id="veg-only"><span></span></span><i class="veg-dot"></i> Veg only</label>
+    </div>
+    <div class="flex center gap-1">
+      <span class="muted small" id="result-count"></span>
+      <select class="select" id="sort"><option value="pop">Popular</option><option value="low">Price: Low → High</option><option value="high">Price: High → Low</option><option value="az">Name A–Z</option></select>
+    </div>
+  </div>
+  <div class="food-grid" id="food-grid"></div>
+  <div id="footer"></div>
+</div>
+<div id="cart-bar-slot"></div>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="js/customer-common.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>

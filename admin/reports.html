@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reports — FoodieHub Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin">
+<div class="shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+      <div class="stat-grid" id="stats"></div>
+      <div class="card panel" style="margin-bottom:20px">
+        <div class="panel-head"><h3 id="sales-title">Sales report</h3>
+          <div class="flex gap-1 wrap center"><div class="tabs" id="tabs"><button data-p="daily" class="active">Daily</button><button data-p="weekly">Weekly</button><button data-p="monthly">Monthly</button></div>
+          <button class="btn btn-outline btn-sm" id="csv"><i class="fa-solid fa-file-csv"></i> Export CSV</button></div></div>
+        <div class="chart-box"><canvas id="c-sales"></canvas></div>
+        <div class="table-wrap" style="margin-top:18px;max-height:340px;overflow:auto"><table class="data"><thead><tr><th>Period</th><th>Orders</th><th>Revenue</th><th>Avg. order value</th></tr></thead><tbody id="period-rows"></tbody></table></div>
+      </div>
+      <div class="grid-2e">
+        <div class="card panel"><div class="panel-head"><h3>Popular food items</h3></div><div class="chart-box sm"><canvas id="c-pop"></canvas></div></div>
+        <div class="card panel"><div class="panel-head"><h3>Sales by category</h3></div><div class="chart-box sm"><canvas id="c-cat"></canvas></div></div>
+      </div>
+      <div class="grid-2e">
+        <div class="card panel flush"><div class="panel-head"><h3>Top items</h3></div><div class="table-wrap" style="margin-top:14px"><table class="data"><thead><tr><th>#</th><th>Item</th><th>Qty sold</th><th>Revenue</th></tr></thead><tbody id="pop-rows"></tbody></table></div></div>
+        <div class="card panel flush"><div class="panel-head"><h3>Customer report</h3></div><div class="table-wrap" style="margin-top:14px"><table class="data"><thead><tr><th>Customer</th><th>Orders</th><th>Spent</th><th>Avg. bill</th></tr></thead><tbody id="cust-rows"></tbody></table></div></div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="js/admin-common.js"></script>
+<script src="js/reports.js"></script>
+</body>
+</html>

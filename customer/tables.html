@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Table Availability — FoodieHub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/customer.css">
+</head>
+<body class="customer">
+<div id="app-header"></div>
+<main class="container c-page">
+  <h1 class="page-title">Table Availability</h1>
+  <p class="page-sub">See which tables are free right now. Your table is highlighted in gold.</p>
+  <div class="mini-stats" id="stats"></div>
+  <div class="legend">
+    <span class="t-available"><i></i> Available</span><span class="t-occupied"><i></i> Occupied</span>
+    <span class="t-reserved"><i></i> Reserved</span><span class="t-cleaning"><i></i> Cleaning</span>
+  </div>
+  <div class="flex gap-1 wrap" id="filters" style="margin-bottom:20px"></div>
+  <div class="tbl-grid" id="tbl-grid"></div>
+  <div class="flex gap-1" style="margin-top:26px"><a class="btn btn-outline" href="qr-entry.html"><i class="fa-solid fa-qrcode"></i> Scan a different table</a></div>
+  <div id="footer"></div>
+</main>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="js/customer-common.js"></script>
+<script src="js/tables.js"></script>
+</body>
+</html>
