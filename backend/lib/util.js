@@ -4,7 +4,7 @@ const TAX_RATE = 0.05;
 const ORDER_STATUSES = ['Pending', 'Confirmed', 'Preparing', 'Ready', 'Served'];
 const TABLE_STATUSES = ['Available', 'Occupied', 'Reserved', 'Cleaning'];
 const TABLE_AREAS = ['Indoor', 'Outdoor', 'Family', 'VIP'];
-const PAY_METHODS = ['UPI', 'Card', 'Cash'];
+const PAY_METHODS = ['Cash'];   // only payment at the counter ('Cash' = paid at counter)
 
 class HttpError extends Error { constructor(status, message) { super(message); this.status = status; } }
 const bad = (msg, status = 400) => { throw new HttpError(status, msg); };

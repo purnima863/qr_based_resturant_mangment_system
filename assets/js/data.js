@@ -115,7 +115,7 @@ function seedCustomers() {
 function seedOrders() {
   const r = rng(42), menu = seedMenu().filter(m => m.available), custs = seedCustomers();
   const now = new Date(), sod = new Date(now); sod.setHours(0, 0, 0, 0);
-  const methods = ['UPI', 'Card', 'Cash'];
+  const methods = ['Cash'];   // payment is only at the counter
   const all = [];
 
   const makeItems = () => {
@@ -154,7 +154,7 @@ function seedOrders() {
     return {
       id: 'ORD-' + (1001 + i), customerId: o.c.id, customerName: o.c.name, phone: o.c.phone,
       table: o.table, items: o.items, subtotal: t.subtotal, discount: 0, tax: t.tax, total: t.total,
-      status, payment: paid ? 'Paid' : 'Unpaid', method: paid ? methods[Math.floor(r() * 3)] : null,
+      status, payment: paid ? 'Paid' : 'Unpaid', method: paid ? methods[0] : null,
       note: '', invoiceNo: paid ? 'INV-' + (5001 + i) : null, createdAt: o.date.toISOString()
     };
   });

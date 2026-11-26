@@ -44,7 +44,7 @@ function openDetails(id) {
   const body = `
     <div class="kv"><div><span>Customer</span><b>${esc(o.customerName)}</b></div><div><span>Phone</span><b>${esc(o.phone)}</b></div>
       <div><span>Table</span><b>Table ${o.table}</b></div><div><span>Placed</span><b>${fmtDateTime(o.createdAt)}</b></div>
-      <div><span>Payment</span><b>${statusBadge(o.payment)} ${o.method ? esc(o.method) : ''}</b></div></div>
+      <div><span>Payment</span><b>${statusBadge(o.payment)} ${o.payment === 'Paid' ? 'at counter' : ''}</b></div></div>
     <h4 style="font-family:var(--font);margin-bottom:6px">Update status</h4>
     <div class="mini-steps">${STATUSES.map((s, i) => `<button data-s="${s}" class="${i < idx ? 'done' : i === idx ? 'current' : ''}">${s}</button>`).join('')}</div>
     <table class="mini-table"><thead><tr><th>Item</th><th>Qty</th><th>Price</th><th class="text-right">Amount</th></tr></thead><tbody>

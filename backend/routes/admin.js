@@ -44,11 +44,10 @@ router.patch('/orders/:code/status', wrap(async (req, res) => {
 
 router.patch('/orders/:code/payment', wrap(async (req, res) => {
   const { id } = await orderOr404(req.params.code);
-  const { payment, method } = req.body;
+  const { payment } = req.body;
   if (!['Paid', 'Unpaid'].includes(payment)) bad('Invalid payment status');
-  if (payment === 'Paid' && !U.PAY_METHODS.includes(method)) bad('Choose a payment method');
-  await pool.query('UPDATE orders SET payment_status = ?, payment_method = ?, invoice_no = COALESCE(invoice_no, ?) WHERE id = ?',
-    [payment, payment === 'Paid' ? method : null, 'INV-' + (4000 + id), id]);
+    await pool.query('UPDATE orders SET payment_status = ?, payment_method = ?, invoice_no = COALESCE(invoice_no, ?) WHERE id = ?',
+    [payment, payment === 'Paid' ? 'Cash' : null, 'INV-' + (4000 + id), id]);
   res.json((await U.loadOrders('WHERE o.id = ?', [id]))[0]);
 }));
 

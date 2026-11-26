@@ -94,18 +94,4 @@ router.get('/my-orders', wrap(async (req, res) => {
   res.json(await U.loadOrders('WHERE c.phone = ?', [phone]));
 }));
 
-/* Customer pays online (demo) or chooses to pay at the counter */
-router.post('/orders/:code/pay', wrap(async (req, res) => {
-  const id = U.parseOrderCode(req.params.code), phone = String(req.body.phone || ''), method = req.body.method;
-  if (!U.PAY_METHODS.includes(method)) bad('Choose a payment method');
-  const [order] = await U.loadOrders('WHERE o.id = ? AND c.phone = ?', [id, phone]);
-  if (!order) bad('Order not found', 404);
-  if (order.payment === 'Paid') bad('Already paid', 409);
-  const paid = method !== 'Cash';                      // cash = pay at counter, admin marks it paid
-  await pool.query('UPDATE orders SET payment_method = ?, payment_status = ?, invoice_no = COALESCE(invoice_no, ?) WHERE id = ?',
-    [method, paid ? 'Paid' : 'Unpaid', 'INV-' + (4000 + id), id]);
-  const [updated] = await U.loadOrders('WHERE o.id = ?', [id]);
-  res.json(updated);
-}));
-
 module.exports = router;

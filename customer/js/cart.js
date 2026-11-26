@@ -36,7 +36,7 @@ if (Customer.init('cart')) {
         <div class="sum-row"><span>GST (${TAX_RATE * 100}%)</span><span>${money(t.tax)}</span></div>
         <div class="sum-row total"><span>Grand Total</span><span>${money(t.total)}</span></div>
         <button class="btn btn-primary btn-lg btn-block" id="place" style="margin-top:16px"><i class="fa-solid fa-paper-plane"></i> Place Order</button>
-        <p class="muted tiny text-center" style="margin-top:10px"><i class="fa-solid fa-lock"></i> You can pay after your meal from the Bill page.</p>
+        <p class="muted tiny text-center" style="margin-top:10px"><i class="fa-solid fa-lock"></i> Pay at the counter after your meal.</p>
       </aside></div>`;
   }
 

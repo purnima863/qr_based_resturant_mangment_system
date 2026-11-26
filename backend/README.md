@@ -16,8 +16,8 @@
 5. Start: `npm start` → open http://localhost:3000/api/health → should show `{"ok":true,"database":"connected"}`
 
 ## API
-**Public (customer):** `GET /api/menu` · `/api/categories` · `/api/tables` · `/api/tables/:n/scan` · `POST /api/orders` · `GET /api/orders/:code?phone=` · `GET /api/my-orders?phone=` · `POST /api/orders/:code/pay`
+**Public (customer):** `GET /api/menu` · `/api/categories` · `/api/tables` · `/api/tables/:n/scan` · `POST /api/orders` · `GET /api/orders/:code?phone=` · `GET /api/my-orders?phone=`
 
 **Admin (header `Authorization: Bearer <token>`):** `POST /api/admin/login` · `GET /api/admin/orders` · `PATCH /api/admin/orders/:code/status|payment` · `POST /api/admin/orders/:code/invoice` · `GET /api/admin/customers` · CRUD `/api/admin/menu`, `/api/admin/categories`, `/api/admin/tables`
 
-Prices/totals are always calculated on the server. Never commit `.env`.
+Payment is only at the counter: the admin marks a bill Paid (`PATCH /api/admin/orders/:code/payment`). Prices/totals are always calculated on the server. Never commit `.env`.

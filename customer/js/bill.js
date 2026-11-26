@@ -1,11 +1,12 @@
 /* =====================================================
-   BILL.JS — invoice, payment status, pay now, print
+   BILL.JS — invoice, payment status, print
+   Payment is ONLY at the counter: the customer shows the bill to the
+   cashier, and the admin marks it "Paid" in the Billing page.
    ===================================================== */
 if (Customer.init('bill')) {
   $('#footer').innerHTML = Customer.footer();
-  const mine = Customer.myOrders();
   let id = new URLSearchParams(location.search).get('id') || Store.session().lastOrderId;
-  if (!mine.find(o => o.id === id)) id = (mine[0] || {}).id;
+  if (!Customer.myOrders().find(o => o.id === id)) id = (Customer.myOrders()[0] || {}).id;
 
   function render() {
     const orders = Customer.myOrders(), o = orders.find(x => x.id === id);
@@ -15,31 +16,21 @@ if (Customer.init('bill')) {
     }
     $('#bill-select').innerHTML = orders.length > 1 ? `<div class="field select-inline"><label>Select order</label>
       <select class="select" id="sel">${orders.map(x => `<option value="${x.id}" ${x.id === id ? 'selected' : ''}>${x.id} — ${fmtDate(x.createdAt)} — ${moneyShort(x.total)}</option>`).join('')}</select></div>` : '';
+
+    const payNote = o.payment === 'Unpaid'
+      ? `<div class="card card-pad" style="margin-top:18px;border-left:5px solid var(--gold)"><b><i class="fa-solid fa-store"></i> Please pay at the counter</b>
+         <p class="muted small" style="margin-top:4px">Show this bill to our cashier after your meal. Your payment status will change to <b>Paid</b> once the cashier confirms.</p></div>`
+      : '<span class="badge st-paid" style="padding:9px 16px">Payment received — thank you!</span>';
+
     $('#bill-root').innerHTML = `<div class="card fade-up">${invoiceHTML(o)}</div>
       <div class="bill-actions">
         <button class="btn btn-primary" id="print"><i class="fa-solid fa-print"></i> Print Bill</button>
-        ${o.payment === 'Unpaid' ? '<button class="btn btn-gold" id="pay"><i class="fa-solid fa-credit-card"></i> Pay Now</button>' : '<span class="badge st-paid" style="align-self:center;padding:9px 16px">Payment received — thank you!</span>'}
         <a class="btn btn-outline" href="orders.html?id=${o.id}"><i class="fa-solid fa-location-dot"></i> Track order</a>
-      </div>
-      ${o.payment === 'Unpaid' && o.method === 'Cash' ? '<p class="small muted" style="margin-top:12px"><i class="fa-solid fa-circle-info"></i> You chose to pay at the counter — please show this bill to our cashier.</p>' : ''}`;
+      </div>${payNote}`;
     const sel = $('#sel'); if (sel) sel.onchange = e => { id = e.target.value; history.replaceState(null, '', '?id=' + id); render(); };
     $('#print').onclick = () => printHTML(invoiceHTML(o));
-    const pay = $('#pay'); if (pay) pay.onclick = () => openPay(o);
-  }
-
-  function openPay(o) {
-    const m = Modal.open({ title: 'Pay ' + money(o.total), size: 'sm',
-      body: `<button class="pay-opt" data-m="UPI"><i class="fa-solid fa-mobile-screen"></i><div><b>UPI</b><small>GPay, PhonePe, Paytm (demo)</small></div></button>
-             <button class="pay-opt" data-m="Card"><i class="fa-regular fa-credit-card"></i><div><b>Credit / Debit card</b><small>Visa, Mastercard, RuPay (demo)</small></div></button>
-             <button class="pay-opt" data-m="Cash"><i class="fa-solid fa-money-bill-wave"></i><div><b>Pay at counter</b><small>Cash or card at the cashier</small></div></button>
-             <p class="tiny muted">This is a front-end demo — no real payment is processed.</p>` });
-    m.addEventListener('click', e => {
-      const b = e.target.closest('[data-m]'); if (!b) return;
-      const orders = Store.orders(), ord = orders.find(x => x.id === o.id); ord.method = b.dataset.m;
-      if (b.dataset.m === 'Cash') Toast.show('Please pay at the counter', 'info');
-      else { ord.payment = 'Paid'; ord.invoiceNo = ord.invoiceNo || 'INV-' + (5000 + parseInt(ord.id.split('-')[1]) - 1000); Toast.show('Payment successful — thank you!'); }
-      Store.setOrders(orders); Modal.close(); render();
-    });
   }
   render();
+  setInterval(render, 4000);            // picks up "Paid" as soon as the admin confirms
+  window.addEventListener('storage', render);
 }

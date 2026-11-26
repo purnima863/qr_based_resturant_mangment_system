@@ -121,7 +121,7 @@ function invoiceHTML(o) {
       <div><span>Billed to</span><b>${esc(o.customerName)}</b></div>
       <div><span>Phone</span><b>${esc(o.phone || '—')}</b></div>
       <div><span>Table</span><b>Table ${esc(o.table)}</b></div>
-      <div><span>Payment</span><b>${esc(o.payment)}${o.method ? ' · ' + esc(o.method) : ''}</b></div>
+      <div><span>Payment</span><b>${o.payment === 'Paid' ? 'Paid at counter' : 'Unpaid — pay at counter'}</b></div>
     </div>
     <table><thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Price</th><th class="r">Amount</th></tr></thead><tbody>
       ${o.items.map(i => `<tr><td>${esc(i.name)}</td><td class="r">${i.qty}</td><td class="r">${money(i.price)}</td><td class="r">${money(i.price * i.qty)}</td></tr>`).join('')}

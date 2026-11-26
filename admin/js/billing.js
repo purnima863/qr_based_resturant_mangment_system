@@ -45,13 +45,13 @@ function openInvoice(id) {
   const o = find(id);
   const m = Modal.open({ title: 'Invoice ' + (o.invoiceNo || ''), size: 'lg', body: invoiceHTML(o),
     footer: `<button class="btn btn-outline" id="regen"><i class="fa-solid fa-percent"></i> Apply discount</button>
-      ${o.payment === 'Unpaid' ? `<select class="select" id="method" style="width:auto"><option>UPI</option><option>Card</option><option>Cash</option></select><button class="btn btn-gold" id="paid"><i class="fa-solid fa-check"></i> Mark as paid</button>`
+      ${o.payment === 'Unpaid' ? `<button class="btn btn-gold" id="paid"><i class="fa-solid fa-check"></i> Payment received at counter</button>`
         : '<button class="btn btn-outline" id="unpaid"><i class="fa-solid fa-rotate-left"></i> Mark unpaid</button>'}
       <button class="btn btn-primary" id="pr"><i class="fa-solid fa-print"></i> Print</button>` });
   const upd = (fn, msg) => { const orders = Store.orders(), x = orders.find(z => z.id === id); fn(x); Store.setOrders(orders); Toast.show(msg); render(); openInvoice(id); };
   $('#pr', m).onclick = () => printHTML(invoiceHTML(find(id)));
   $('#regen', m).onclick = () => openGenerate(id);
-  const paid = $('#paid', m); if (paid) paid.onclick = () => upd(x => { x.payment = 'Paid'; x.method = $('#method', m).value; }, 'Bill marked as paid');
+  const paid = $('#paid', m); if (paid) paid.onclick = () => upd(x => { x.payment = 'Paid'; x.method = 'Cash'; }, 'Bill marked as paid');
   const unp = $('#unpaid', m); if (unp) unp.onclick = () => upd(x => { x.payment = 'Unpaid'; x.method = null; }, 'Bill marked as unpaid');
 }
 
